@@ -1,9 +1,4 @@
 # Files from plugins
-/**/docroot/css/.sass-cache
-/**/META-INF/MANIFEST.MF
-/**/build.properties
-
-themes/**/docroot/css/
-themes/**/docroot/images/
-themes/**/docroot/js/
-themes/**/docroot/templates/
+sdk/**/docroot/css/.sass-cache
+sdk/**/META-INF/MANIFEST.MF
+sdk/**/build.properties

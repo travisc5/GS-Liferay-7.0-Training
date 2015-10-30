@@ -1,0 +1,233 @@
+#set ($events = $event.getSiblings())
+#set ($eventObj = [])
+
+#foreach ($event in $events)
+	#set ($VOID = $eventObj.add({"start" : "$event.start.data", "end" : "$event.end.data", "day" : "$event.day.data", "type" : "$event.types.data", "title" : "$event.title.data", "presenter" : "$event.presenter.data", "description" : "$event.description.data"}))
+#end
+
+<div class="calendar-events-container">
+	<div class="type-select-container">
+		<h3>#language ("filter-by-type")</h3>
+
+		<ul class="unstyled">
+			<li class="active event-type" data-selected="true" data-type="all">
+				<a href="javascript:;">All Events</a>
+			</li>
+
+			<li class="event-type" data-selected="false" data-type="backend">
+				<a href="javascript:;">#language ("backend")</a>
+			</li>
+
+			<li class="event-type" data-selected="false" data-type="frontend">
+				<a href="javascript:;">#language ("frontend")</a>
+			</li>
+
+			<li class="event-type" data-selected="false" data-type="nonTech">
+				<a href="javascript:;">#language ("nonTech")</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="event-day-container">
+		<ul class="unstyled">
+			<li class="active event-day" data-day="mon" data-selected="true">
+				<a href="javascript:;">Monday</a>
+			</li>
+
+			<li class="event-day" data-day="tue" data-selected="false">
+				<a href="javascript:;">Tuesday</a>
+			</li>
+
+			<li class="event-day" data-day="wed" data-selected="false">
+				<a href="javascript:;">Wednesday</a>
+			</li>
+
+			<li class="event-day" data-day="thur" data-selected="false">
+				<a href="javascript:;">Thursday</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="calendar-events">
+		#foreach($event in $sortTool.sort($eventObj, "start"))
+			#if ($event.day == 'mon')
+				#set ($cssClass = "event")
+			#else
+				#set ($cssClass = "event hide")
+			#end
+
+			<div class="$cssClass" data-day="$event.day" data-end-time="$event.end" data-start-time="$event.start" data-type="$event.type">
+				<div class="event-time">
+					<span class="time">$event.start</span>
+				</div>
+
+				<div class="event-detail">
+					<span class="title">$event.title</span>
+
+					<span class="presenter">$event.presenter</span>
+
+					#if ($event.description != '')
+						<button class="btn btn-info event-description" data-description="$event.description" type="button">Show Description</button>
+					#end
+				</div>
+			</div>
+		#end
+	</div>
+</div>
+
+<script>
+	AUI().use(
+		'aui-base',
+		'aui-modal',
+		'event',
+		'node',
+		function(A) {
+			var descriptionButton = A.all('.event-description');
+			var time = A.all('.event-time .time');
+			var trainingDaysContainer = A.one('.event-day-container');
+			var trainingEvents = A.all('.calendar-events');
+			var trainingTypeContainer = A.one('.type-select-container');
+
+			descriptionButton.on(
+				'click',
+				function(e) {
+					e.preventDefault();
+
+					var ct = e.currentTarget;
+					var description = ct.attr('data-description');
+
+					new A.Modal(
+						{
+							bodyContent: description,
+							centered: true,
+							destroyOnHide: true,
+							headerContent: '<h3>Description</h3>',
+							modal: true,
+							render: '#wrapper',
+
+						}
+					).render();
+				}
+			);
+
+			trainingEvents.all('.event').each(
+				function(node) {
+					var day = node.attr('data-day');
+					var prevNode = node.previous();
+					var startTime = node.attr('data-start-time');
+
+					if (prevNode && (prevNode.attr('data-day') == day) && (prevNode.attr('data-start-time') == startTime)) {
+						node.addClass('duplicate-start-time');
+					}
+				}
+			);
+
+			function toggleType(event) {
+				var ct = event.currentTarget;
+
+				var li = ct.ancestor('.event-type');
+
+				var type = li.attr('data-type');
+				var isSelected = li.attr('data-selected');
+
+				if (isSelected == 'false' && type != 'all') {
+					if (trainingEvents) {
+						trainingEvents.all('.event').addClass('hide');
+
+						var selector = '.event[data-type="' + type + '"]';
+
+						var correspondngEvents = trainingEvents.all(selector);
+
+						if (correspondngEvents.size() > 0) {
+							correspondngEvents.removeClass('hide');
+						}
+					}
+
+					var selected = li.siblings('.event-type[data-selected="true"]');
+
+					selected.attr('data-selected', 'false');
+					selected.removeClass('active');
+
+					li.attr('data-selected', 'true');
+					li.addClass('active');
+				}
+
+				if (type == 'all') {
+					trainingEvents.all('.event').removeClass('hide');
+				}
+			}
+
+
+			function toggleVisibility(event) {
+				var ct = event.currentTarget;
+
+				var li = ct.ancestor('.event-day');
+
+				var day = li.attr('data-day');
+				var isSelected = li.attr('data-selected');
+
+				if (isSelected == 'false') {
+					if (trainingEvents) {
+						trainingEvents.all('.event').addClass('hide');
+
+						var selector = '.event[data-day="' + day + '"]';
+
+						var correspondngEvents = trainingEvents.all(selector);
+
+						if (correspondngEvents.size() > 0) {
+							correspondngEvents.removeClass('hide');
+						}
+					}
+
+					var selected = li.siblings('.event-day[data-selected="true"]');
+
+					selected.attr('data-selected', 'false');
+					selected.removeClass('active');
+
+					li.attr('data-selected', 'true');
+					li.addClass('active');
+				}
+			}
+
+			function getFormattedTime(militaryTime) {
+				var hours24Format = parseInt(militaryTime.substring(0, 2),10);
+				var hours = ((hours24Format + 11) % 12) + 1;
+				var amPm = hours24Format > 11 ? 'pm' : 'am';
+				var minutes = militaryTime.substring(2);
+
+				return hours + ':' + minutes + amPm;
+			}
+
+			time.each(
+				function(node) {
+					var textVal = node.text();
+
+					var newTextVal = textVal.replace(
+						/(\d+)/g,
+						function(match) {
+							return getFormattedTime(match);
+						}
+					);
+
+					node.text(newTextVal);
+				}
+			);
+
+			if (trainingDaysContainer) {
+				trainingDaysContainer.delegate(
+					'click',
+					toggleVisibility,
+					'.event-day a'
+				);
+			}
+
+			if (trainingTypeContainer) {
+				trainingTypeContainer.delegate(
+					'click',
+					toggleType,
+					'.event-type a'
+				);
+			}
+		}
+	);
+</script>

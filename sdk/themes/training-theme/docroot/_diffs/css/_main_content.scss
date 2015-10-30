@@ -1,0 +1,40 @@
+.event {
+	display: table;
+	margin-bottom: 1em;
+	width: 100%;
+
+	.event-description.btn {
+		margin-top: 20px;
+	}
+
+	.event-time, .event-detail {
+		display: table-cell;
+	}
+
+	.event-time {
+		width: 20%;
+	}
+
+	&.duplicate-start-time .event-time {
+		visibility: hidden;
+	}
+
+	.title, .presenter {
+		display: block;
+	}
+
+	.presenter {
+		color: #909295;
+		font-size: 12px;
+	}
+
+	.title {
+		color: #333;
+		font-size: 20px;
+	}
+
+	.time {
+		color: #909295;
+		font-size: 22px;
+	}
+}

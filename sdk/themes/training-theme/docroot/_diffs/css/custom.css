@@ -5,5 +5,11 @@
 @import "event_mixins";
 
 .aui {
+	@import "global";
 
+	@import "header";
+
+	@import "main_content";
+
+	@import "footer";
 }

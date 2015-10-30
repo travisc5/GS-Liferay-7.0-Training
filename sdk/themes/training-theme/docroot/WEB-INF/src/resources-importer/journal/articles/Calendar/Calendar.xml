@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+
+<root available-locales="en_US" default-locale="en_US">
+	<dynamic-element fieldNamespace="ddm" indexType="keyword" localizable="true" name="event" readOnly="false" repeatable="true" required="false" showLabel="true" type="ddm-separator" width="">
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" multiple="false" name="day" readOnly="false" repeatable="false" required="true" showLabel="true" type="select" width="">
+			<dynamic-element name="option6473" type="option" value="mon">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Monday]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6474" type="option" value="tue">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Tuesday]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6475" type="option" value="wed">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Wednesday]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option6476" type="option" value="thur">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Thursday]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Select]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[[""]]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" fieldNamespace="ddm" indexType="keyword" localizable="true" name="start" readOnly="false" repeatable="false" required="true" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Event Start Time]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[Please use military time]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" fieldNamespace="ddm" indexType="keyword" localizable="true" name="end" readOnly="false" repeatable="false" required="true" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Event End Time]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[Please use military time]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" name="title" readOnly="false" repeatable="false" required="true" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Event Title]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" name="description" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Event Description]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" name="presenter" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Presenter]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element dataType="string" indexType="keyword" localizable="true" multiple="false" name="types" readOnly="false" repeatable="false" required="true" showLabel="true" type="select" width="">
+			<dynamic-element name="option20449" type="option" value="backend">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Back End]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option20450" type="option" value="frontend">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Front End]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<dynamic-element name="option20451" type="option" value="nonTech">
+				<meta-data locale="en_US">
+					<entry name="label">
+						<![CDATA[Nontechnical]]>
+					</entry>
+				</meta-data>
+			</dynamic-element>
+			<meta-data locale="en_US">
+				<entry name="label">
+					<![CDATA[Type]]>
+				</entry>
+				<entry name="predefinedValue">
+					<![CDATA[[""]]]>
+				</entry>
+				<entry name="tip">
+					<![CDATA[Please enter military time]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<meta-data locale="en_US">
+			<entry name="label">
+				<![CDATA[Event]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+			<entry name="style">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+</root>
